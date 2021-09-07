@@ -6,18 +6,19 @@
 # miss
 
 class Shoot
-  def self.get_type(frame)
-      type = :strike if self.is_strike?(frame)
-      type = :spare if self.is_spare?(frame)
-      type = :normal if self.is_normal?(frame)
+  def get_type(frame)
+      print "Strike\n" if self.is_strike?(frame)
+      print "Spare\n" if self.is_spare?(frame)
+      print "Normal\n" if self.is_normal?(frame)
   end
-  def self.is_strike?(frame)
-      return true if frame[:first_shoot] == 10
+  def is_strike?(frame)
+      return true if frame[:first_shoot] == 10 
+      
   end
-  def self.is_spare? (frame)
+  def is_spare? (frame)
       return true if (frame[:first_shoot] + frame[:second_shoot] == 10) and (frame[:first_shoot] < 10)
   end
-  def self.is_normal?
+  def is_normal?(frame)
       return true if frame[:first_shoot] + frame[:second_shoot] < 10
   end
 end
