@@ -18,6 +18,29 @@ class Board
     end
   end
 
+  def add_frame(hash_frame, index)
+    @board[index] = hash_frame
+    calculate_scores(index)
+    @total_score = @board[index][:total]
+  end
+
+  def calculate_scores(index)
+    0.upto(index) do |index_cicle|
+      get_total(index_cicle, Shoot.get_type(@board[index_cicle]))
+    end
+  end
+
+  def get_total(index_gt, type)
+    case type
+    when :strike
+      calculate_strike(index_gt)
+    when :spare
+      calculate_spare(index_gt)
+    else
+      calculate_normal(index_gt)
+    end
+  end
+
   def calculate_strike(index)
     score = @board[index - 1][:total_turn_score] + 10
     next_frame = @board[index + 1]
