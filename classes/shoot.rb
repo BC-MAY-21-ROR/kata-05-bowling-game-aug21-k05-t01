@@ -1,25 +1,22 @@
-# strike tiró todos los pines en un intento 
-# spare tiró los pines pero utilizó los dos intentos
-# Hacer un spare es tirar los diez en dos tiros
-# open o normal que no tiró todos los pines
-# frame es turno, no es tiro
-# miss
+# frozen_string_literal: true
 
+# Clase shoot para definir las reglas de puntaje
 class Shoot
-  def get_type(frame)
-      print "Strike\n" if self.is_strike?(frame)
-      print "Spare\n" if self.is_spare?(frame)
-      print "Normal\n" if self.is_normal?(frame)
+  def self.get_type(frame)
+    return :strike if strike?(frame)
+    return :spare if spare?(frame)
+    return :normal if normal?(frame)
   end
-  def is_strike?(frame)
-      return true if frame[:first_shoot] == 10 
-      
+
+  def self.strike?(frame)
+    (frame[:first_shoot] == 10) and (frame[:second_shoot]).zero?
   end
-  def is_spare? (frame)
-      return true if (frame[:first_shoot] + frame[:second_shoot] == 10) and (frame[:first_shoot] < 10)
+
+  def self.spare?(frame)
+    (frame[:first_shoot] + frame[:second_shoot] == 10) and (frame[:first_shoot] < 10)
   end
-  def is_normal?(frame)
-      return true if frame[:first_shoot] + frame[:second_shoot] < 10
+
+  def self.normal?(frame)
+    frame[:first_shoot] + frame[:second_shoot] < 10
   end
 end
-
