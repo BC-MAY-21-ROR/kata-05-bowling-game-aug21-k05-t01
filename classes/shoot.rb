@@ -9,7 +9,7 @@ class Shoot
   end
 
   def self.strike?(frame)
-    (frame[:first_shoot] == 10) and (frame[:second_shoot]).zero?
+    (frame[:first_shoot] == 10)
   end
 
   def self.spare?(frame)
